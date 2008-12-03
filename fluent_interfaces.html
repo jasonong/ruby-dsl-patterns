@@ -15,7 +15,6 @@
 <ul>
   <li>
     <p>return value of a called method: self referential, where new context is equivalent to the last context</p>
-    <p>Eg.</p>
     <h3>establishing profiles</h3>
     <p>
       <pre><code class='ruby'>
@@ -47,6 +46,28 @@
   </li>
   <li>wrappers nested or funtional specification</li>
 </ul>
+
+<h2>problems</h2>
+<ul>
+  <li>
+    <p>Method chaining to only good for stateless object. If there's a need to add state to an object that's method chained, use wrappers to 'wrap' the state in.</p>
+    <p>
+      <pre><code class='ruby'>
+# Problem: 'add' method in the chain will have a problem saving the object as the rest of the methods are not called yet
+  rule.add.CustomerProfile.new.frequency(5).monthly_spending(20)
+
+# Solution: wrapping CustomerProfile object in the 'add' method
+  rule.add(CustomerProfile.new.frequency(5).monthly_spending(20))
+
+  def add(profile)
+    # do something
+    save
+  end
+      </code></pre>
+    </p>
+  </li>
+</ul>
+
 </body>
 </html>
 

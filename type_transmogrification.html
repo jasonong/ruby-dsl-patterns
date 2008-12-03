@@ -1,0 +1,122 @@
+<html>
+<head>
+  <title>Ruby DSL Patterns - type transmogrification</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"></link>
+  <script src="clean_pre.js"></script>
+</head>
+<body>
+<h1>type transmogrification</h1>
+
+<h2>description</h2>
+
+<p>Transform types as needed as part of a fluent interface call.</p>
+
+<h2>methods</h2>
+<ul>
+  <li>
+    <p>method chaining returning a different type in each chain</p>
+    <h3>unit conversion</h3>
+    <p>
+      <pre><code class='ruby'>
+# Getting "Flour" unit to recipe
+  recipe.add 200.pounds.of "Flour"
+
+# Open Numeric class to add methods and aliases
+  class Numeric
+    def gram
+      self
+    end
+    alias_method :grams, :gram
+
+    def pound
+      self * 453.59237
+    end
+    alias_method :pounds, :pound
+    alias_method :lb, :pound
+    alias_method :lbs, :pound
+
+    def of ingredient
+      if ingredient.kind_of? String
+        ingredient = Ingredient.new(ingredient)
+      end
+      ingredient.quantity = self
+      ingredient
+    end
+  end
+      </code></pre>
+    </p>
+  </li>
+</ul>
+
+<h2>problems</h2>
+<ul>
+  <li>
+    <p>Who returns what?</p>
+    <p>
+      <pre><code class='ruby'>
+# Problem: What would each method in sequence return?
+  1.pound.of "Flour"
+      </code></pre>
+    </p>
+  </li>
+  <li>
+    <p>Character noise</p>
+    <p>
+      <pre><code class='ruby'>
+# Problem: Must remember to put qoutes around our objec type?
+  1.pound.of "Flour"
+
+# Solution 1: Use const_missing on Object
+  1.pound.of Flour
+  
+  # Any constant that's missing becomes an ingredient! Yikes! That's an anti-pattern!
+  class Object
+    def self.const_missing(sym)
+      Ingredient.new(sym.to_s)
+    end
+  end
+
+# Solution 2: Mix const_missing in (don't provide universe wide access to whacky stuff you've implemented for your dsl)
+  module IngredientBuilder
+    def self.append_features(target)
+      def target.const_missing(name)
+        Ingredient.new(name.to_s)
+      end
+      super
+    end
+  end
+
+  class TestIngredients < Test::Unit::TestCase
+    include IngredientBuilder
+    
+    def test_ingredient_factory
+      i = Flour
+      assert i.kind_of? Ingredient
+      assert_equal(i.name, "Flour")
+    end
+  end
+
+# Trick: Smarter const factories
+  module SmartIngredientBuilder
+    INGREDIENTS = {
+      "Floor" => "Flour", "Flower" => "Flour", "Flur" => "Flour"
+    }
+    def self.append_ffeatures(target)
+      def target.const_missing(name)
+        i = INGREDIENTS.keys.find do |val|
+          name.to_s == val
+        end
+        return Ingredient.new(INGREDIENT[i] unless i.nil?
+        raise "No such ingredient"
+      end
+    end
+  end
+      </code></pre>
+    </p>
+  </li>
+</ul>
+
+
+</body>
+</html>
+

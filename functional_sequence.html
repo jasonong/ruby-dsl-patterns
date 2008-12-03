@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>Ruby DSL Patterns - functional sequence</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"></link>
+  <script src="clean_pre.js"></script>
+</head>
+<body>
+<h1>functional sequence</h1>
+
+<h2>description</h2>
+
+<p>Using a wrapper (i.e. a closure) to supply context to a linear sequence of method calls.</p>
+
+<h2>methods</h2>
+<ul>
+  <li>
+    <h3>building object attributes</h3>
+    <p>
+      <pre><code class='ruby'>
+# Use a 'consist_of' method to avoid repeating writing 'recipe' variable
+  recipe = Recipe.new
+  recipe.consist_of {
+    add 1.lb.of Flour
+    add 200.grams.of Milk
+    add 1.gram.of Nutmeg
+  }
+
+  def consists_of &block
+    instance_eval &black
+  end
+      </code></pre>
+    </p>
+  </li>
+</ul>
+
+
+</body>
+</html>
+

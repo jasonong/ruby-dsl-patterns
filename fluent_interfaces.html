@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Ruby DSL Patterns - fluent interfaces</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"></link>
+  <script src="clean_pre.js"></script>
+</head>
+<body>
+<h1>fluent interfaces</h1>
+
+<h2>description</h2>
+
+<p>Context being passed through method chaining</p>
+
+<h2>methods</h2>
+<ul>
+  <li>
+    <p>return value of a called method: self referential, where new context is equivalent to the last context</p>
+    <p>Eg.</p>
+    <h3>establishing profiles</h3>
+    <p>
+      <pre><code class='ruby'>
+# Chaining of methods to create a profile
+  comes_in_rarely = CustomerProfile.new.frequency(5).monthly_spending(20)
+
+# Methods will always return self
+  everyday = CustomerProfile.new.member.frequency(25).monthly_spending(500)
+
+# CustomerProfile class
+  class CustomerProfile
+    def member
+      # do something
+      self
+    end
+
+    def frequency(times_per_month)
+      # do something
+      self
+    end
+
+    def monthly_spending(dollars)
+      # do something
+      self
+    end
+  end
+      </code></pre>
+    </p>
+  </li>
+  <li>wrappers nested or funtional specification</li>
+</ul>
+</body>
+</html>
+

@@ -1,0 +1,79 @@
+pre { background: #000; color: #fff; padding: 0 10px; }
+
+/* Language specific styles */
+
+.c {}
+.c .comment { color: green; }
+.c .string { color: blue; }
+.c .preprocessor { color: gray; }
+.c .keyword { color: blue; }
+.c .vars { color: #d00; }
+
+.vb {}
+.vb .comment { color: green; }
+.vb .string { color: blue; }
+.vb .preprocessor { color: gray; }
+.vb .keyword { color: blue; }
+
+.sql {}
+.sql .comment { color: green; }
+.sql .string { color: red; }
+.sql .keyword { color: blue; }
+.sql .func { color: #ff1493; }
+.sql .op { color: #808080; }
+
+.xml {}
+.xml .cdata { color: #ff1493; }
+.xml .comments { color: green; }
+.xml .tag { font-weight: bold; color: blue; }
+.xml .tag-name { color: black; font-weight: bold; }
+.xml .attribute { color: red; }
+.xml .attribute-value { color: blue; }
+
+.delphi {}
+.delphi .comment { color: #008200; font-style: italic; }
+.delphi .string { color: blue; }
+.delphi .number { color: blue; }
+.delphi .directive { color: #008284; }
+.delphi .keyword { font-weight: bold; color: navy; }
+.delphi .vars { color: #000; }
+
+.python {}
+.python .comment { color: green; }
+.python .string { color: red; }
+.python .docstring { color: green; }
+.python .keyword { color: blue; font-weight: bold;}
+.python .builtins { color: #ff1493; }
+.python .magicmethods { color: #808080; }
+.python .exceptions { color: brown; }
+.python .types { color: brown; font-style: italic; }
+.python .commonlibs { color: #8A2BE2; font-style: italic; }
+
+.ruby {}
+.ruby .comment { color: #c00; }
+.ruby .string  { color: #f0c; }
+.ruby .symbol  { color: #02b902; }
+.ruby .keyword { color: yellow; }
+.ruby .variable { color: #6cf; }
+
+.css {}
+.css .comment { color: green; }
+.css .string { color: red; }
+.css .keyword { color: blue; }
+.css .colors { color: darkred; }
+.css .vars { color: #d00; }
+
+.javascript {}
+.javascript .comment { color: rgb(63,127,95); }
+.javascript .string { color: rgb(42,0,255); }
+.javascript .keyword { color: rgb(127,0,85); font-weight: bold }
+.javascript .annotation { color: #646464; }
+.javascript .number { color: #C00000; }
+
+.cpp {}
+.cpp .comment { color: #e00; }
+.cpp .string { color: red; }
+.cpp .preprocessor { color: #CD00CD; font-weight: bold; }
+.cpp .keyword { color: #5697D9; font-weight: bold; }
+.cpp .datatypes { color: #2E8B57; font-weight: bold; }
+
